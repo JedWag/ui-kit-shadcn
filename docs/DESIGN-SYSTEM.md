@@ -1,6 +1,6 @@
 # Dark Dashboard Design System
 
-The rationale doc behind the `shadcn-ui-kit` package (`~/Github/shadcn-ui-kit`) — originally
+The rationale doc behind the `ui-kit-shadcn` package (`~/Github/ui-kit-shadcn`) — originally
 extracted from the `guzzler` (eco-mileage) React frontend, itself derived from the
 shadcnuikit.com reference dashboard. **This file explains *why* the kit looks the way it
 does**; the kit itself (`src/`) is what you actually install and import — don't hand-copy CSS
@@ -452,8 +452,8 @@ with a flat color.
 ## How to use this in another project
 
 Install the package (see the kit's own `README.md` for the exact command), import
-`shadcn-ui-kit/theme.css` after your Tailwind imports, and import components from
-`shadcn-ui-kit` instead of hand-copying JSX/CSS out of this doc. Treat this file as background
+`ui-kit-shadcn/theme.css` after your Tailwind imports, and import components from
+`ui-kit-shadcn` instead of hand-copying JSX/CSS out of this doc. Treat this file as background
 for *why* things look the way they do — useful when deciding how to build something new that
 isn't in the kit yet (a page layout, a new dialog) — not as the source of truth for values the
 package already provides as real code.

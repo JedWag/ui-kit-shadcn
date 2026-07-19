@@ -1,4 +1,4 @@
-# shadcn-ui-kit
+# ui-kit-shadcn
 
 Portable dark-dashboard design system: theme tokens (colors, type scale, spacing, radius) plus
 a set of shadcn-style React components (`Button`, `Card`, `Table`, `Dialog`, `Tabs`, `Sidebar`,
@@ -7,7 +7,7 @@ etc.), built on `@base-ui/react` and Tailwind CSS 4.
 This is meant to be **installed as a dependency in each project, not copy-pasted**. That's the
 whole point: code that lives in `node_modules` is naturally hands-off, because the next
 `npm install` would wipe local edits anyway. Want a change? Edit it here, in this repo, then
-update the version in whichever project consumes it. Never edit `shadcn-ui-kit` files from
+update the version in whichever project consumes it. Never edit `ui-kit-shadcn` files from
 inside a project that installed it.
 
 See `docs/DESIGN-SYSTEM.md` for the rationale behind the palette/spacing/component choices —
@@ -19,10 +19,10 @@ copy values out of by hand.
 From the consuming project:
 
 ```
-npm install ~/Github/shadcn-ui-kit
+npm install ~/Github/ui-kit-shadcn
 ```
 
-(or, once this repo has a remote: `npm install git+ssh://git@github.com/<you>/shadcn-ui-kit.git`)
+(or, once this repo has a remote: `npm install git+ssh://git@github.com/<you>/ui-kit-shadcn.git`)
 
 This adds a `file:` — or git — dependency, which npm installs into `node_modules` as a real
 copy. It is **not** a symlink into this repo, so editing the installed copy won't touch this
@@ -38,7 +38,7 @@ To pick up changes after editing this repo, re-run `npm install` in the consumin
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "shadcn-ui-kit/theme.css";
+@import "ui-kit-shadcn/theme.css";
 ```
 
 Light mode is left as shadcn's stock neutrals (`shadcn/tailwind.css` already provides it) —
@@ -47,7 +47,7 @@ this kit only overrides `.dark`.
 **2. Wrap your app in the theme provider:**
 
 ```tsx
-import { ThemeProvider, Toaster } from "shadcn-ui-kit"
+import { ThemeProvider, Toaster } from "ui-kit-shadcn"
 
 function App() {
   return (
@@ -62,7 +62,7 @@ function App() {
 **3. Import components as needed:**
 
 ```tsx
-import { Button, Card, CardContent, Dialog, DialogContent } from "shadcn-ui-kit"
+import { Button, Card, CardContent, Dialog, DialogContent } from "ui-kit-shadcn"
 ```
 
 **4. Dialog footer buttons** — every dialog in the reference app pairs an orange `cancel`
