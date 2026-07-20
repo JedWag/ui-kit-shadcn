@@ -381,8 +381,9 @@ from scratch, scaffold it with the `shadcn` CLI.
   into a narrower column, it becomes an overlay.
 - **Toggle**: `<SidebarTrigger />` button in the topbar, plus the `Cmd/Ctrl+B` keyboard
   shortcut, both wired up by the block itself.
-- **Nav items** are `h-10 text-base` with `size-5` icons — sized up from the button defaults so
-  primary nav reads as visually distinct from body text, not the same scale as form labels.
+- **Nav items** use `<SidebarMenuButton size="lg">` (`h-12 text-lg`) with `size-6` icons — sized
+  up from the button defaults so primary nav reads as visually distinct from body text, not the
+  same scale as form labels.
 
 ### The rounded-corner "floating panel" look around the topbar
 
