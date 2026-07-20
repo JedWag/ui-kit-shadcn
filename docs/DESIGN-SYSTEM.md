@@ -293,6 +293,12 @@ specifically — it's what makes Cancel read as a real, differentiated choice ne
 rather than a plain gray "close" button. Regular in-page actions (e.g. "Generate Report",
 "Add location") stay on the plain `default` variant.
 
+**Positioning**: pass `split` to `DialogFooter` — `<DialogFooter split>` — to place Cancel on
+the left and Save on the right (`sm:justify-between` instead of the default `sm:justify-end`
+that clusters both on the right). Cancel renders first, Save renders last. This is the built-in
+layout for the pairing above; consuming apps should use `split` rather than overriding
+`className` per dialog.
+
 ## Table
 
 Stock shadcn table primitive, unmodified:
