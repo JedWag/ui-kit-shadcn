@@ -19,7 +19,7 @@ export function AppShell({
     <SidebarProvider>
       {sidebar}
       <SidebarInset>
-        <header className="flex h-14 items-center justify-between border-b px-4 md:rounded-tl-xl md:rounded-tr-xl">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background px-4 md:rounded-tl-xl md:rounded-tr-xl">
           <div className="flex items-center gap-2">
             <SidebarTrigger />
             <Separator orientation="vertical" className="h-6" />
