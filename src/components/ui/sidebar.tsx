@@ -23,7 +23,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "./tooltip"
-import { PanelLeftIcon } from "lucide-react"
+import { PanelRightOpen, PanelRightClose } from "lucide-react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -256,7 +256,7 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+  const { state, toggleSidebar } = useSidebar()
 
   return (
     <Button
@@ -271,7 +271,7 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      {state === "expanded" ? <PanelRightOpen /> : <PanelRightClose />}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

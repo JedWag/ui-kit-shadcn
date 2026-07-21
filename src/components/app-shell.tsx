@@ -29,9 +29,9 @@ export function AppShell({
       {sidebar}
       <SidebarInset>
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background px-4 md:rounded-tl-xl md:rounded-tr-xl">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <SidebarTrigger />
-            <Separator orientation="vertical" className="h-6" />
+            <Separator orientation="vertical" className="mx-2 h-4" />
           </div>
           <div className="flex items-center gap-1">
             {headerActions}
