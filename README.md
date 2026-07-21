@@ -1,119 +1,113 @@
-# umbra
+# 🌑 umbra
 
-## Goal
+> **The Standard Operating Environment (SOE), Application Harness, and shared Platform SDK for our app ecosystem.**
+> 
+> *Fix or improve a design pattern once, here, and every consuming application automatically inherits it.*
 
-One shared repo, installed as a real dependency by every personal app (qb, guzzler, future
-ones), so the entire visual and structural language lives in exactly one place: theme
-(colors/type scale/spacing/radius), components (`Button`, `Card`, `Table`, `Dialog`, `Sidebar`,
-etc.), **and shared structural patterns** — the app shell (sidebar + header layout), the
-settings-dialog layout, and anything else that would otherwise get re-derived or copy-pasted
-per app. Fix or improve something once, here, and every app that depends on it picks it up.
-This is **not** a components-only library — it's the shared framework/rules layer for every app
-that uses it, so treat "does this belong in the kit?" as "would every app want this to look/work
-the same way?", not "is this a generic enough React component?".
+---
 
-Built on `@base-ui/react` and Tailwind CSS 4.
+## 👁️ The Vision
 
-This is meant to be **installed as a dependency in each project, not copy-pasted**. That's the
-whole point: code that lives in `node_modules` is naturally hands-off, because the next
-`npm install` would wipe local edits anyway. Want a change? Edit it here, in this repo, then
-update the version in whichever project consumes it. Never edit `umbra` files from
-inside a project that installed it.
+`umbra` is **not** a copy-paste dumping ground for primitive components. It is the centralized source of truth for design tokens, visual rhythm, and composite structural shells across all our downstream applications (like `qb` and `guzzler`).
 
-See `docs/DESIGN-SYSTEM.md` for the rationale behind the palette/spacing/component choices —
-useful background when building something new that isn't in the kit yet, not something to
-copy values out of by hand.
+By enforcing absolute structural discipline at the framework layer, we ensure that every app feels like a native extension of the same suite.
 
-## Installing in a project
-
-This repo is public on GitHub (`github.com/JedWag/umbra`) — **install from there, not
-from a local path.** A local `file:` path only resolves on the one machine that has this repo
-checked out at that exact location; it breaks for anyone else and for CI. From the consuming
-project:
-
+```mermaid
+graph TD
+    Umbra[🌑 umbra-ui / Platform SDK] -->|Installed as Git Dependency| QB[📊 qb]
+    Umbra -->|Installed as Git Dependency| Guzzler[🛢️ guzzler]
+    
+    style Umbra fill:#111,stroke:#f97316,stroke-width:2px,color:#fff
+    style QB fill:#222,stroke:#22c55e,stroke-width:1px,color:#ccc
+    style Guzzler fill:#222,stroke:#3b82f6,stroke-width:1px,color:#ccc
 ```
+### Themes
+
+- **Umbra** — Dark mode (default)
+- **Lumen** — Light mode
+
+## 📜 The Non-Negotiable Invariants
+
+To guarantee mathematical visual alignment across all screens, every component and consuming layout must respect these physical laws:
+
+### 1. Framework, Not Just Primitives
+Do not assemble page shells or dialog layout wrappers out of raw HTML or ad-hoc Tailwind `div`s. Consume the structural layout modules directly:
+* **`AppShell`**: Locks down the sidebar, header alignment, navigation trigger, and core layout canvas.
+* **`SettingsDialogShell`**: A pre-built modal structure with navigation tabs, standard footer layout, and consistent geometry.
+* **`SettingsTabSection`**: Standard header, title, and action positioning structure.
+
+### 2. Strict Spacing Invariants & Vertical Rhythm
+* **Zero Outer Margins on Text:** **NEVER** add top or bottom margins (`mt-*`, `mb-*`, `my-*`) directly to text elements (`h1`–`h6`, `p`, `label`). The line-height must strictly equal the bounding box height.
+* **Containers Own Spacing:** Parent containers (flex/grid) control all spacing between elements using `gap-*` utilities.
+* **Our Standard Spacing Scale:**
+  - `gap-1` / `gap-2` (4px–8px): Tight pairings (e.g., Title + Subtitle, Label + Input).
+  - `gap-4` (16px): Content stacks (e.g., forms, stacked paragraphs, tables).
+  - `gap-6` / `gap-8` (24px–32px): Major layout divisions, dialog sections, panel padding.
+
+### 3. Single Barrel Exports
+All public components, utilities, and hooks must be re-exported via [`src/index.ts`](file:///home/jed/Github/umbra-ui/src/index.ts).
+
+---
+
+## 🚀 Quick Start
+
+### 1. Installation
+Install directly from GitHub. **Never copy-paste source files into a project.**
+
+```bash
+# Install the library into your project
 npm install git+https://github.com/JedWag/umbra.git
 ```
 
-npm clones the repo and installs it into `node_modules` as a real copy — not a symlink, so
-editing the installed copy won't touch this repo and won't survive a reinstall, which is exactly
-the boundary you want. It also means a plain `npm install` never picks up new commits on its
-own — after pushing a change here, bump the dependency (or just delete
-`node_modules/umbra` and reinstall) in each consuming project to pick it up.
+> [!TIP]
+> For active same-day development across the kit and a consuming app, you can temporarily use a local file path:
+> `npm install file:../umbra`
+> Just revert back to the GitHub URL before committing.
 
-(A local `file:../path/to/umbra` install still works during active same-day development
-on both the kit and a consumer at once, but treat it as temporary — switch back to the git URL
-before committing.)
-
-## Using it
-
-**1. Layer the theme CSS into your app's stylesheet**, after Tailwind/shadcn's own imports:
+### 2. Stylesheet Setup
+Include the design system styles in your app's root stylesheet right after Tailwind and base shadcn styles:
 
 ```css
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "umbra/theme.css";
+@import "umbra/theme.css"; /* 🌑 Enforces the Umbra + Lumen design tokens */
 ```
 
-Ships a real light palette and a real dark palette, both extracted from the reference
-dashboard's `default` theme preset — not shadcn's stock neutrals.
-
-**2. Wrap your app in the theme provider:**
+### 3. Theme Provider
+Wrap your application root with `ThemeProvider` to provide standard theme storage and support switching between **Umbra** (default dark mode) and **Lumen** (light mode).
 
 ```tsx
 import { ThemeProvider, Toaster } from "umbra"
 
 function App() {
   return (
-    <ThemeProvider storageKey="myapp-theme">
-      {/* ...your app... */}
+    <ThemeProvider storageKey="myapp-theme" defaultTheme="umbra">
+      {/* ... Your Application ... */}
       <Toaster />
     </ThemeProvider>
   )
 }
 ```
 
-**3. Import components as needed:**
-
+### 4. Import Components
+Import pre-styled, SOE-compliant components directly:
 ```tsx
-import { Button, Card, CardContent, Dialog, DialogContent } from "umbra"
+import { Button, Card, Dialog, DialogFooter } from "umbra"
 ```
 
-**4. Dialog footer buttons** — every dialog in the reference app pairs an orange `cancel`
-button with a green `save` button (see `docs/DESIGN-SYSTEM.md` → Buttons). Use the variants
-directly instead of rebuilding the color classes:
+---
 
-```tsx
-<DialogFooter>
-  <Button variant="cancel" onClick={onClose}>Cancel</Button>
-  <Button variant="save" type="submit">Save</Button>
-</DialogFooter>
-```
+## 🛠️ Development Workflow
 
-## Peer dependencies
+### Local-First, Promote Later
+1. **Audit Existing Work:** Check if a layout pattern or component already exists in `umbra`.
+2. **Build Locally:** If exploring a brand-new component, build it locally inside the specific consuming project (`qb` or `guzzler`).
+3. **Design for Promotion:** Write local components with clean, self-contained props/slots. When stable, promote the component back to `umbra` and update the dependency in the app.
 
-Your project needs `react`, `react-dom`, `tailwindcss`, `@tailwindcss/vite` (or whatever
-Tailwind 4 build integration you use), `tw-animate-css`, and the `shadcn` package itself for its
-base Tailwind layer (`shadcn/tailwind.css`) — everything else this kit needs
-(`@base-ui/react`, `class-variance-authority`, `lucide-react`, `sonner`, etc.) is declared as a
-regular dependency and installs automatically.
-
-## Adding a new component to the kit
-
-Use the `shadcn` CLI from inside this repo (it reads `components.json`) so new components land
-consistent with the existing ones:
-
-```
+### Adding shadcn Primitives
+To extend the kit, run the shadcn CLI inside the root of this repository:
+```bash
 npx shadcn add <component>
 ```
-
-Then add the new file to `src/index.ts`'s exports.
-
-## What's deliberately *not* in this kit
-
-App-specific things stay in the consuming project, not here: *content* of pages, entity-specific
-dialogs (e.g. an "Employee" form), API clients, routing, branding/logo image itself. Shared
-*structure* — the app shell layout, the settings-dialog layout, and anything else every app
-should look/behave the same way for — belongs in the kit (see Goal above), not copy-pasted per
-app.
+Remember to add the exports to [`src/index.ts`](file:///home/jed/Github/umbra-ui/src/index.ts).

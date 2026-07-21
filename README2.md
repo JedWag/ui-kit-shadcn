@@ -1,8 +1,3 @@
-**Sorry for the confusion!** 
-
-I **did** create the file. Here's the full content I wrote for your new `README.md`:
-
-```markdown
 # umbra-ui
 
 A shared design system and component library for consistent UI across personal projects.
@@ -118,8 +113,3 @@ All other dependencies (`@base-ui/react`, `lucide-react`, etc.) are automaticall
 ---
 
 **Ready to use?** Check out `docs/DESIGN-SYSTEM.md` for token philosophy and component guidelines.
-```
-
-The file has been saved as `README.md` in your current directory. You can open it now. 
-
-Let me know what you'd like to change!
