@@ -13,14 +13,16 @@ const buttonVariants = cva(
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         text: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        destructive:
+        danger:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        // dialog-footer pairing: Cancel is orange, the primary submit ("Save") is green —
-        // both are the `outline` shape tinted with a status color, and swap to a solid fill
-        // with inverted text on hover. See theme.css's --status-*-border/--status-*-bg vars.
-        cancel:
+        // dialog-footer pairing: warning (Cancel) is orange, success (the primary submit,
+        // "Save") is green — both are the `outline` shape tinted with a status color, and
+        // swap to a solid fill with inverted text on hover. See theme.css's
+        // --status-*-border/--status-*-bg vars.
+        warning:
           "border border-[var(--status-orange-border)] bg-[var(--status-orange-bg)] text-[var(--status-orange-border)] hover:border-[var(--status-orange-bg)] hover:bg-[var(--status-orange-border)] hover:text-[var(--status-orange-bg)]",
-        save: "border border-[var(--status-green-border)] bg-[var(--status-green-bg)] text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
+        success:
+          "border border-[var(--status-green-border)] bg-[var(--status-green-bg)] text-[var(--status-green-border)] hover:border-[var(--status-green-bg)] hover:bg-[var(--status-green-border)] hover:text-[var(--status-green-bg)]",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

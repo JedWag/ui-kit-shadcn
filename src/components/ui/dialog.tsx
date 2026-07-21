@@ -139,10 +139,10 @@ function DialogActions({
 }) {
   return (
     <DialogFooter split>
-      <Button variant="cancel" onClick={onCancel}>
+      <Button variant="warning" onClick={onCancel}>
         {cancelLabel}
       </Button>
-      <Button variant="save" onClick={onSave} disabled={saveDisabled}>
+      <Button variant="success" onClick={onSave} disabled={saveDisabled}>
         {saveLabel}
       </Button>
     </DialogFooter>
