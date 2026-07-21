@@ -15,7 +15,6 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
         // dialog-footer pairing: Cancel is orange, the primary submit ("Save") is green —
         // both are the `outline` shape tinted with a status color, and swap to a solid fill
         // with inverted text on hover. See theme.css's --status-*-border/--status-*-bg vars.
