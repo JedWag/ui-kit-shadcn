@@ -4,7 +4,7 @@ import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
 import { cn } from "../../lib/utils"
-import { Button, WarningButton, SuccessButton } from "./button"
+import { Button, WarningButton, SuccessButton, DangerButton } from "./button"
 import { XIcon } from "lucide-react"
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
@@ -180,6 +180,47 @@ function DialogSplitFooter({
   )
 }
 
+// Three-slot dialog footer: Delete (left, danger) / Cancel (center, warning) / Save (right,
+// success) - defaults for dialogs that add a destructive action alongside the usual Cancel/Save
+// pair. Any slot can be overridden with any other element, same pattern as DialogSplitFooter.
+// left has no default element when neither left nor onDelete is given (matches "only show
+// Delete when editing an existing record" - there's no sensible default Delete action).
+function DialogTriFooter({
+  left,
+  center,
+  right,
+  onDelete,
+  onCancel,
+  onSave,
+  deleteLabel = "Delete",
+  cancelLabel = "Cancel",
+  saveLabel = "Save",
+  saveDisabled = false,
+}: {
+  left?: React.ReactNode
+  center?: React.ReactNode
+  right?: React.ReactNode
+  onDelete?: () => void
+  onCancel?: () => void
+  onSave?: () => void
+  deleteLabel?: string
+  cancelLabel?: string
+  saveLabel?: string
+  saveDisabled?: boolean
+}) {
+  return (
+    <DialogFooter className="sm:justify-between">
+      {left ?? (onDelete && <DangerButton onClick={onDelete}>{deleteLabel}</DangerButton>)}
+      {center ?? <WarningButton onClick={onCancel}>{cancelLabel}</WarningButton>}
+      {right ?? (
+        <SuccessButton onClick={onSave} disabled={saveDisabled}>
+          {saveLabel}
+        </SuccessButton>
+      )}
+    </DialogFooter>
+  )
+}
+
 function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
   return (
     <DialogPrimitive.Title
@@ -212,6 +253,7 @@ function DialogDescription({
 export {
   Dialog,
   DialogSplitFooter,
+  DialogTriFooter,
   DialogClose,
   DialogContent,
   DialogDescription,
