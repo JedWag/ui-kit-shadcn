@@ -41,11 +41,17 @@ function DialogOverlay({
 
 function DialogContent({
   className,
+  title,
+  description,
   children,
   showCloseButton = true,
   ...props
-}: DialogPrimitive.Popup.Props & {
+}: Omit<DialogPrimitive.Popup.Props, "title"> & {
   showCloseButton?: boolean
+  // A dialog's most basic elements: a title, and an optional one-line description under it.
+  // Renders the header internally - no separate <DialogHeader> needed in the caller.
+  title?: React.ReactNode
+  description?: React.ReactNode
 }) {
   return (
     <DialogPortal>
@@ -58,6 +64,7 @@ function DialogContent({
         )}
         {...props}
       >
+        {title !== undefined && <DialogHeader title={title} description={description} />}
         {children}
         {showCloseButton && (
           <DialogPrimitive.Close
