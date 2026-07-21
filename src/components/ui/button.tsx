@@ -12,7 +12,7 @@ const buttonVariants = cva(
         outline:
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        text: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         // dialog-footer pairing: Cancel is orange, the primary submit ("Save") is green —
@@ -56,7 +56,7 @@ function Button({
   )
 }
 
-// Icon-only button preset: bakes in variant="ghost" size="icon" (the pairing used at every
+// Icon-only button preset: bakes in variant="text" size="icon" (the pairing used at every
 // icon-only button site - topbar actions, calendar/list nav arrows) so apps never set either.
 function IconButton({
   className,
@@ -65,7 +65,7 @@ function IconButton({
   "aria-label": string
   children: React.ReactNode
 }) {
-  return <Button variant="ghost" size="icon" className={className} {...props} />
+  return <Button variant="text" size="icon" className={className} {...props} />
 }
 
 export { Button, buttonVariants, IconButton }
