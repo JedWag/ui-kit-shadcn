@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Command as CommandPrimitive } from "cmdk"
 import { Filter } from "lucide-react"
+import { cn } from "../lib/utils"
 import { Command, CommandEmpty, CommandItem, CommandList } from "./ui/command"
 import { Input } from "./ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
@@ -32,7 +33,7 @@ export function SearchDropFilter({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <Command className="overflow-visible bg-transparent p-0">
+      <Command className={cn("w-56 overflow-visible bg-transparent p-0", className)}>
         <PopoverTrigger
           nativeButton={false}
           render={
@@ -42,7 +43,6 @@ export function SearchDropFilter({
                 <Input
                   key={value}
                   id={id}
-                  className={className}
                   placeholder={placeholder}
                   defaultValue={selected?.label ?? ""}
                 />
