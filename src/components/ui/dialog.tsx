@@ -44,7 +44,7 @@ function DialogContent({
   title,
   description,
   children,
-  showCloseButton = true,
+  showCloseButton = false,
   ...props
 }: Omit<DialogPrimitive.Popup.Props, "title"> & {
   showCloseButton?: boolean
